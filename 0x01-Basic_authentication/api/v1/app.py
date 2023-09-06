@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""
-Route module for the API
+"""Route module for the API
 """
 from os import getenv
 from api.v1.views import app_views
@@ -25,8 +24,7 @@ else:
 
 @app.before_request
 def handle_request():
-    """
-    Handles request authentication and authorization.
+    """Handles request authentication and authorization.
 
     This function is executed before processing each incoming request.
     It checks if authentication and authorization are required for the
@@ -52,8 +50,7 @@ def handle_request():
 
 @app.errorhandler(403)
 def error_forbidden(error) -> str:
-    """
-    Custom error handler for HTTP 403 Forbidden.
+    """Custom error handler for HTTP 403 Forbidden.
 
     Returns:
         str: JSON response with an error message.
@@ -63,8 +60,7 @@ def error_forbidden(error) -> str:
 
 @app.errorhandler(401)
 def error_unauthorized(error) -> str:
-    """
-    Custom error handler for HTTP 401 Unauthorized.
+    """Custom error handler for HTTP 401 Unauthorized.
 
     Returns:
         str: JSON response with an error message.
@@ -74,8 +70,7 @@ def error_unauthorized(error) -> str:
 
 @app.errorhandler(404)
 def not_found(error) -> str:
-    """
-    Custom error handler for HTTP 404 Not Found.
+    """Custom error handler for HTTP 404 Not Found.
 
     Returns:
         str: JSON response with an error message.
