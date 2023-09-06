@@ -16,8 +16,8 @@ class BasicAuth(Auth):
     retrieving user objects based on credentials.
     """
 
-    def extract_base64_authorization_header(self,
-                                            authorization_header: str) -> str:
+    def extract_base64_authorization_header(self, authorization_header: str
+                                            ) -> str:
         """
         Extract the base64 portion of an authorization header.
 
