@@ -38,7 +38,8 @@ def handle_request():
         HTTP 403 Forbidden: If the user does not have permission to
         access the resource.
     """
-    paths = ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']
+    paths = ['/api/v1/status/', '/api/v1/unauthorized/',
+             '/api/v1/forbidden/', '/api/v1/stat*']
     if auth is None:
         return
     if not auth.require_auth(request.path, paths):
