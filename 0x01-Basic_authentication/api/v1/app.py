@@ -61,7 +61,7 @@ def error_forbidden(error) -> str:
 
 
 @app.errorhandler(401)
-def unauthorized(error) -> str:
+def error_unauthorized(error) -> str:
     """
     Custom error handler for HTTP 401 Unauthorized.
 
