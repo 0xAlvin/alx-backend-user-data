@@ -55,7 +55,7 @@ def forbidden(error) -> str:
     Returns:
         str: JSON response with an error message.
     """
-    return jsonify({"error": "Forbidden"})
+    return jsonify({"error": "Forbidden"}), 403
 
 
 @app.errorhandler(401)
@@ -65,7 +65,7 @@ def unauthorized(error) -> str:
     Returns:
         str: JSON response with an error message.
     """
-    return jsonify({"error": "Unauthorized"})
+    return jsonify({"error": "Unauthorized"}), 401
 
 
 @app.errorhandler(404)
