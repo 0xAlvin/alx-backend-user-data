@@ -29,6 +29,11 @@ class Auth:
         if path is None or excluded_paths is None:
             return True
         path_with_slash = path if path.endswith('/') else path + '/'
+        excluded_path = [x.rstrip('*')
+                         for x in excluded_paths if x.endswith('*')]
+        for exclude in excluded_path:
+            if path.startswith(exclude):
+                return False
 
         return path_with_slash not in excluded_paths
 
