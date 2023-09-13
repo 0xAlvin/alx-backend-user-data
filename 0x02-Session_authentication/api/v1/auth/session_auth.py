@@ -9,7 +9,8 @@ class SessionAuth(Auth):
     """SessionAuth class inherits from Auth class"""
     user_id_by_session_id = {}
 
-    def destroy_session(self, request=None) -> bool:
+    def destroy_session(self, request=None):
+        """Removes a users session id"""
         if request is None:
             return False
         session_id = self.session_cookie(request)
