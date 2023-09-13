@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Module for Index views"""
+"""Module for Login views"""
 
 from flask import request, jsonify
 from api.v1.views import app_views
@@ -9,7 +9,7 @@ from os import getenv
 
 @app_views.route('/auth_session/login', methods=['POST'], strict_slashes=False)
 def login():
-
+    """Login route"""
     from api.v1.app import auth
 
     email = request.form.get('email')
@@ -27,6 +27,6 @@ def login():
     user = users_with_email[0]
     session_id = auth.create_session(user.id)
     session_cookie = getenv('SESSION_NAME')
-    reponse = jsonify(user.to_json())
-    reponse.set_cookie(session_cookie, session_id)
-    return reponse
+    response = jsonify(user.to_json())
+    response.set_cookie(session_cookie, session_id)
+    return response
