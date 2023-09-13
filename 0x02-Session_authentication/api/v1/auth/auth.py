@@ -2,6 +2,7 @@
 """Authentication class"""
 
 from typing import List, TypeVar
+from os import getenv
 
 
 class Auth:
@@ -12,6 +13,14 @@ class Auth:
     for checking if authentication is required, extracting the authorization
     header from an HTTP request, and checking the current user's access.
     """
+
+    def session_cookie(self, request=None):
+        """returns a cookie value from a request"""
+        if request is None:
+            return None
+        cookie_name = getenv('SESSION_NAME')
+        cookie_val = request.cookies.get(cookie_name)
+        return cookie_val
 
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """
