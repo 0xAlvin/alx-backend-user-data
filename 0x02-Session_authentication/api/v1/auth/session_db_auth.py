@@ -22,6 +22,7 @@ class SessionDBAuth(SessionExpAuth):
         """
         if user_id is None:
             return None
+
         if not User.search({'id': user_id}):
             return None
 
@@ -51,7 +52,12 @@ class SessionDBAuth(SessionExpAuth):
         Returns:
             str: The user ID, or None if not found or expired.
         """
+        if session_id is None:
+            return None
         sessions = UserSession.search({'session_id': session_id})
+        if sessions is None or len(sessions) <= 0:
+            return None
+
         if self.session_duration <= 0:
             return sessions[0].user_id
 
