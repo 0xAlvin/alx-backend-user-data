@@ -23,7 +23,8 @@ class SessionDBAuth(SessionExpAuth):
         if user_id is None:
             return None
 
-        if User.search({'id': user_id}) is None:
+        user = User.search({'id': user_id})
+        if user is None:
             return None
 
         session_id = super().create_session(user_id)
@@ -56,7 +57,7 @@ class SessionDBAuth(SessionExpAuth):
             return None
 
         sessions = UserSession.search({'session_id': session_id})
-        if sessions is None or len(sessions) <= 0:
+        if sessions is None or len(sessions) == 0:
             return None
 
         if self.session_duration <= 0:
