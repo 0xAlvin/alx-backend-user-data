@@ -4,6 +4,7 @@
 from datetime import datetime, timedelta
 from api.v1.auth.session_exp_auth import SessionExpAuth
 from models.user_session import UserSession
+from models.user import User
 
 
 class SessionDBAuth(SessionExpAuth):
@@ -21,8 +22,11 @@ class SessionDBAuth(SessionExpAuth):
         """
         if user_id is None:
             return None
+        if not User.get(user_id):
+            return None
 
         session_id = str(super().create_session(user_id))
+
         if session_id is None:
             return None
 
@@ -77,7 +81,7 @@ class SessionDBAuth(SessionExpAuth):
         session_id = self.session_cookie(request)
         if session_id:
             session = UserSession.search({'session_id': session_id})
-            session.remove()
+            session[0].remove()
             return True
         else:
             return False
