@@ -19,6 +19,9 @@ class SessionDBAuth(SessionExpAuth):
         Returns:
             str: The created session ID, or None if unsuccessful.
         """
+        if user_id is None:
+            return None
+
         session_id = str(super().create_session(user_id))
         if session_id is None:
             return None
@@ -58,7 +61,7 @@ class SessionDBAuth(SessionExpAuth):
             return None
         return sessions[0].user_id
 
-    def destroy_session(self, request=None):
+    def destroy_session(self, request=None) -> bool:
         """
         Remove a user's session object.
 
