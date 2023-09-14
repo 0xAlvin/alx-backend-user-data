@@ -53,25 +53,30 @@ class SessionDBAuth(SessionExpAuth):
         Returns:
             str: The user ID, or None if not found or expired.
         """
-        if session_id is None:
-            return None
+        user_id = UserSession.search({"session_id": session_id})
+        if user_id:
+            return user_id
+        return None
+        # if session_id is None:
+        #     return None
 
-        sessions = UserSession.search({'session_id': session_id})
-        if sessions is None or len(sessions) == 0:
-            return None
+        # sessions = UserSession.search({'session_id': session_id})
 
-        if self.session_duration <= 0:
-            return sessions[0].user_id
+        # if sessions is None or len(sessions) == 0:
+        #     return None
 
-        created_at_date = sessions[0].created_at
-        if created_at_date is None:
-            return None
+        # if self.session_duration <= 0:
+        #     return sessions[0].user_id
 
-        expiration_time = created_at_date + \
-            timedelta(seconds=self.session_duration)
-        if expiration_time < datetime.now():
-            return None
-        return sessions[0].user_id
+        # created_at_date = sessions[0].created_at
+        # if created_at_date is None:
+        #     return None
+
+        # expiration_time = created_at_date + \
+        #     timedelta(seconds=self.session_duration)
+        # if expiration_time < datetime.now():
+        #     return None
+        # return sessions[0].user_id
 
     def destroy_session(self, request=None) -> bool:
         """
