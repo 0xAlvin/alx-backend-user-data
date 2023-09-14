@@ -87,6 +87,8 @@ class SessionDBAuth(SessionExpAuth):
         if request is None:
             return False
         session_id = self.session_cookie(request)
+        if not session_id:
+            return False
         try:
             sessions = UserSession.search({'session_id': session_id})
         except Exception:
