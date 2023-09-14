@@ -22,7 +22,7 @@ class SessionDBAuth(SessionExpAuth):
         """
         if user_id is None:
             return None
-        if not User.get(user_id):
+        if not User.search({'id': user_id}):
             return None
 
         session_id = super().create_session(user_id)
