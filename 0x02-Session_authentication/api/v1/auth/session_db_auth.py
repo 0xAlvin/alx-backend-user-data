@@ -81,7 +81,7 @@ class SessionDBAuth(SessionExpAuth):
         session_id = self.session_cookie(request)
         if session_id:
             session = UserSession.search({'session_id': session_id})
-            session[0].remove()
+            session.remove()
             return True
         else:
             return False
