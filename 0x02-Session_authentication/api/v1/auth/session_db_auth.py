@@ -54,6 +54,7 @@ class SessionDBAuth(SessionExpAuth):
         """
         if session_id is None:
             return None
+
         sessions = UserSession.search({'session_id': session_id})
         if sessions is None or len(sessions) <= 0:
             return None
